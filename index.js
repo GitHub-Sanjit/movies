@@ -1,6 +1,4 @@
-
-createAutocomplete({
-  root: document.querySelector(".autocomplete"),
+const autocompleteConfig = {
   renderOption: (movie) => {
     const imgSrc = movie.Poster === "N/A" ? "" : movie.Poster;
     return `
@@ -12,25 +10,34 @@ createAutocomplete({
     onMovieSelect(movie);
   },
 
-  inputValue(movie  ) {
-    return movie.Title
+  inputValue(movie) {
+    return movie.Title;
   },
 
-  async fetchData (searchTerm){
-  const response = await axios.get("http://www.omdbapi.com/", {
-    params: {
-      apikey: "e9a5c027",
-      //   s: "avengers",
-      s: searchTerm,
-    },
-  });
+  async fetchData(searchTerm) {
+    const response = await axios.get("http://www.omdbapi.com/", {
+      params: {
+        apikey: "e9a5c027",
+        //   s: "avengers",
+        s: searchTerm,
+      },
+    });
 
-  if (response.data.Error) {
-    return [];
-  }
+    if (response.data.Error) {
+      return [];
+    }
 
-  return response.data.Search;
-}
+    return response.data.Search;
+  },
+};
+
+createAutocomplete({
+  ...autocompleteConfig,
+  root: document.querySelector("#left-autocomplete"),
+});
+createAutocomplete({
+  ...autocompleteConfig,
+  root: document.querySelector("#right-autocomplete"),
 });
 
 const onMovieSelect = async (movie) => {
