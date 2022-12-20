@@ -81,8 +81,8 @@ const runComparison = () => {
 
     console.log(leftStat, rightStat);
 
-    const leftSideValue = leftStat.dataset.value; // dataset=?
-    const rightSideValue = rightStat.dataset.value;
+    const leftSideValue = parseInt(leftStat.dataset.value);
+    const rightSideValue = parseInt(rightStat.dataset.value);
 
     console.log(leftSideValue, rightSideValue);
     if (rightSideValue > leftSideValue) {
